@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section class="row">
+            <div class="col-12">
+                <h1>Liste des offres</h1>
+            </div>
+            {% for offre in offres %}
+                <div class="col-4">
+                    <div class="card h-100" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{offre.type}}</h5>
+                        <p class="card-text"> Prix : {{offre.prix}}  €</p>
+                        {% if offre.capacité == 1 %}
+                            <p class="card-text"> Capacité : {{offre.capacité}} personne</p>
+                        {% else %}
+                            <p class="card-text"> Capacité : {{offre.capacité}} personnes</p>
+
+                        {% endif %}
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}
