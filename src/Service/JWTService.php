@@ -8,14 +8,14 @@ class JWTService
     //on génére le token
     public function generate(array $header,array $payload, string $secret, int $validity = 10800): string
     {
-        if($validity <= 0){
-            return "";
-        }
-        $now = new DateTimeImmutable();
-        $exp = $now->getTimestamp() + $validity;
+        if($validity > 0){
+            $now = new DateTimeImmutable();
+            $exp = $now->getTimestamp() + $validity;
 
-        $payload['iat'] = $now->getTimestamp();
-        $payload['exp'] = $exp;
+            $payload['iat'] = $now->getTimestamp();
+            $payload['exp'] = $exp;
+        }
+        
 
         //encoder tout ça en bas64
         $base64Header = base64_encode(json_encode($header));
@@ -38,5 +38,67 @@ class JWTService
 
 
         return $jwt;
+    }
+
+    // vérifier si le token est valide 
+    public function isValid(string $token): bool
+    {
+        return preg_match(
+            '/^[a-zA-Z0-9\-\_\=]+\.[a-zA-Z0-9\-\_\=]+\.[a-zA-Z0-9\-\_\=]+$/',
+            $token
+        ) === 1;
+    }
+
+    // vérifier si le token a expiré 
+
+    // on commence par récupérer le payload
+    public function getPayload(string $token): array
+    {
+        // démonter le token
+        $array = explode('.', $token);
+
+        // décoder le payload
+        $payload = json_decode(base64_decode($array[1]), true);
+
+
+        return $payload;
+
+    }
+    // ensuite on vérifie la date d'expiration
+    public function isExpired(string $token): bool
+    {
+        $payload = $this->getPayload($token);
+
+        $now = new DateTimeImmutable();
+
+        return $payload['exp'] < $now->getTimestamp();
+
+    }
+
+    // vérifier la signature du token
+
+    // on commence par récupérer le Header
+    public function getHeader(string $token): array
+    {
+        // démonter le token
+        $array = explode('.', $token);
+
+        // décoder le Header
+        $header = json_decode(base64_decode($array[0]), true);
+
+
+        return $header;
+
+    }
+    public function check(string $token, string $secret): bool
+    {
+        // récuperer le header et le payload :
+        $header = $this->getHeader($token);
+        $payload = $this->getPayload($token);
+
+        // vérifier la signature en régénérant un nv token
+        $verifToken = $this->generate($header, $payload, $secret, 0); //pour pas regénerer des date d'expiration et je pourrais donc vérifier mon token
+
+        return $token === $verifToken;
     }
 }
