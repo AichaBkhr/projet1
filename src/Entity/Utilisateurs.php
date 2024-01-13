@@ -38,7 +38,10 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $date_de_creation = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'string')]
+    private $resetToken;
+
+    #[ORM\Column(type: 'string', length: 100)]
     private $is_verified = false;
 
     public function getId(): ?int
@@ -160,4 +163,22 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
 
     }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+
+    }
+    public function setResetToken(string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+        return $this;
+
+    }
+
+    public function clearResetToken(): void
+    {
+        $this->resetToken = '';
+    }
+
 }

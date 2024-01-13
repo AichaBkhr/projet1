@@ -30,7 +30,7 @@ class RegistrationFormType extends AbstractType
             ->add('nom_utilisateur', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Entrez votre nom et prénom'
+                    'placeholder' => 'Entrez votre nom et prénom figurants sur votre carte d\'identité'
 
                     ],
                     'label' => 'Nom d\'utilisateur',
