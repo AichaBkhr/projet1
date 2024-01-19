@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administration des offres{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Administration des offres</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Prix</th>
+                            <th>Capacité</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for offre in offres %}
+                            <tr>
+                                <td>{{ offre.id }}</td>
+                                <td>{{ offre.type }}</td>
+                                <td>{{ offre.prix }}</td>
+                                <td>{{ offre.capacite }}</td>
+                                <td>
+                                    <a href="{{ path('admin_offres_edit', {id: offre.id})}}" class="btn btn-success">Modifier</a>
+                                    <a href="{{ path('admin_offres_delete', {id: offre.id})}}" class="btn btn-success">Supprimer</a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

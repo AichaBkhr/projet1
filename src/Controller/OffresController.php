@@ -13,7 +13,7 @@ class OffresController extends AbstractController
     public function index( OffresRepository $offresRepository): Response
     {
         return $this->render('offres/index.html.twig', [
-            'offres' => $offresRepository->findBy([],['capacité' => 'asc'])
+            'offres' => $offresRepository->findBy([],['capacite' => 'asc'])
         ]);
     }
 }

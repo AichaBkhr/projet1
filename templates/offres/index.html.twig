@@ -11,17 +11,17 @@
             {% for offre in offres %}
                 <div class="col-4">
                     <div class="card h-100" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    {#<img src="..." class="card-img-top" alt="...">#}
                     <div class="card-body">
                         <h5 class="card-title">{{offre.type}}</h5>
                         <p class="card-text"> Prix : {{offre.prix}}  €</p>
-                        {% if offre.capacité == 1 %}
-                            <p class="card-text"> Capacité : {{offre.capacité}} personne</p>
+                        {% if offre.capacite == 1 %}
+                            <p class="card-text"> Capacité : {{offre.capacite}} personne</p>
                         {% else %}
-                            <p class="card-text"> Capacité : {{offre.capacité}} personnes</p>
+                            <p class="card-text"> Capacité : {{offre.capacite}} personnes</p>
 
                         {% endif %}
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="{{ path('cart_add', {id: offre.id}) }}" class="btn btn-primary">Ajouter au panier</a>
                     </div>
                 </div>
                 </div>

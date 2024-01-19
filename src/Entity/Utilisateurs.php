@@ -20,7 +20,7 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'json')]
     private array $roles = [];
 
     /**
@@ -38,10 +38,10 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $date_de_creation = null;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $resetToken;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
 
     public function getId(): ?int

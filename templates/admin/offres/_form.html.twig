@@ -1,0 +1,6 @@
+{{ form_start(offreForm)}}
+    {{ form_row(offreForm.type)}}
+    {{ form_row(offreForm.prix)}}
+    {{ form_row(offreForm.capacite)}}
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(offreForm)}}

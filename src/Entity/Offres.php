@@ -6,6 +6,7 @@ use App\Repository\OffresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OffresRepository::class)]
 class Offres
@@ -16,13 +17,16 @@ class Offres
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique : true)]
+    #[Assert\NotBlank(message: 'Le type de l\'offre ne peut pas être vide !')]
     private ?string $type = null;
 
-    #[ORM\Column]
-    private ?int $prix = null;
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    //#[Assert\PositiveOrZero(message:'Le prix ne peut pas être négatif')]
+    private ?float $prix = null;
 
     #[ORM\Column]
-    private ?int $capacité = null;
+    #[Assert\PositiveOrZero(message:'La capacité ne peut être négative')]
+    private ?int $capacite = null;
 
     #[ORM\OneToMany(mappedBy: 'offres', targetEntity: DetailsCommandes::class)]
     private Collection $detailsCommandes;
@@ -49,26 +53,26 @@ class Offres
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): static
+    public function setPrix(float $prix): static
     {
         $this->prix = $prix;
 
         return $this;
     }
 
-    public function getCapacité(): ?int
+    public function getCapacite(): ?int
     {
-        return $this->capacité;
+        return $this->capacite;
     }
 
-    public function setCapacité(int $capacité): static
+    public function setCapacite(int $capacite): static
     {
-        $this->capacité = $capacité;
+        $this->capacite = $capacite;
 
         return $this;
     }
