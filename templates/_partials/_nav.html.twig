@@ -15,7 +15,7 @@
           <a class="nav-link" href="{{path('app_offres')}}">Les offres</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Mon compte</a>
+          <a class="nav-link" href="{{path('cart_index')}}">Mon Panier</a>
           </li>
           {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item">
@@ -34,6 +34,9 @@
               </li>
           <li class="nav-item">
             <a class="nav-link" href="{{path('app_offres')}}">Les offres</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{path('cart_index')}}">Mon Panier</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{path('app_login')}}">Me connecter</a>

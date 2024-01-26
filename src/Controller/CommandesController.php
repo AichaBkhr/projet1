@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Commandes;
+use App\Entity\DetailsCommandes;
+use App\Repository\OffresRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/commandes', name: 'app_orders_')]
+
+class CommandesController extends AbstractController
+{
+    #[Route('/ajout', name: 'add')]
+    public function add(SessionInterface $session, OffresRepository $offresRepository, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $panier = $session->get('panier',[]);
+
+        if ($panier === []) {
+            $this->addFlash('message','Votre panier est vide');
+            return $this->redirectToRoute('app_main');
+        }
+
+        //sion on crée la commande 
+        $order = new Commandes();
+
+        //remplir la commande
+        $order->setUtilisateur($this->getUser());
+        $order->setReference(uniqid());
+
+        $order->setCle2(strtoupper(bin2hex(random_bytes(3)))); 
+        $order->setDateDeCreation(new \DateTimeImmutable()); 
+        $order->setQrCode($this->getUser()->getCle1().$order->getCle2());
+
+        //parcourir le panier pour crér les détails des commandes 
+        foreach ($panier as $item => $quantity) {
+            $orderDetails = new DetailsCommandes();
+            //on va cherher l'offre
+            $offre = $offresRepository->find($item);
+            $price = $offre->getPrix();
+
+            //créer le détail de commande
+            $orderDetails->setOffres($offre);
+            $orderDetails->setPrix($price);
+            $orderDetails->setQuantité($quantity);
+
+            $order->addDetailsCommandes($orderDetails);
+        }
+        // On persiste et on flush
+        $em->persist($order);
+        $em->flush();
+
+        $session->remove('panier');
+
+        $this->addFlash('message', 'Commande créée avec succès');
+        return $this->redirectToRoute('app_main');
+
+
+
+
+    }
+}

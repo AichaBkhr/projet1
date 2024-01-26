@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use App\Repository\OffresRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

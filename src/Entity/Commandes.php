@@ -4,10 +4,14 @@ namespace App\Entity;
 
 use App\Repository\CommandesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: CommandesRepository::class)]
 class Commandes
 {
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,7 +20,7 @@ class Commandes
     #[ORM\Column(length: 20)]
     private ?string $reference = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $date_de_creation = null;
 
     #[ORM\Column(length: 255, unique : true)]
@@ -25,8 +29,19 @@ class Commandes
     #[ORM\Column(length: 255, unique : true)]
     private ?string $QrCode = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\ManyToOne(targetEntity: Utilisateurs::class, inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateurs $utilisateur = null;
+
+    #[ORM\OneToMany(mappedBy: 'commandes', targetEntity: DetailsCommandes::class, orphanRemoval: true, cascade: ['persist'])]
+    private  $detailsCommandes = null;
+
+    public function __construct()
+    {
+        $this->detailsCommandes = new ArrayCollection();
+        //$this->created_at = new \DateTimeImmutable();
+
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +104,31 @@ class Commandes
     public function setUtilisateur(?Utilisateurs $utilisateur): static
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    } public function getDetailsCommandes(): Collection
+    {
+        return $this->detailsCommandes;
+    }
+
+    public function addDetailsCommandes(DetailsCommandes $detailsCommandes): self
+    {
+        if (!$this->detailsCommandes->contains($detailsCommandes)) {
+            $this->detailsCommandes[] = $detailsCommandes;
+            $detailsCommandes->setCommandes($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommandes(DetailsCommandes $detailsCommandes): self
+    {
+        if ($this->detailsCommandes->removeElement($detailsCommandes)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommandes->getCommandes() === $this) {
+                $detailsCommandes->setCommandes(null);
+            }
+        }
 
         return $this;
     }
