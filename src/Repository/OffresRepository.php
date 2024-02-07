@@ -20,7 +20,7 @@ class OffresRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offres::class);
     }
-
+    
 //    /**
 //     * @return Offres[] Returns an array of Offres objects
 //     */

@@ -15,6 +15,7 @@
                             <th>Type</th>
                             <th>Prix</th>
                             <th>Capacité</th>
+                            <th>Nombre de ventes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                                 <td>{{ offre.type }}</td>
                                 <td>{{ offre.prix }}</td>
                                 <td>{{ offre.capacite }}</td>
+                                <td>{{ offre.nombreDeVentes }}</td>
                                 <td>
                                     <a href="{{ path('admin_offres_edit', {id: offre.id})}}" class="btn btn-success">Modifier</a>
                                     <a href="{{ path('admin_offres_delete', {id: offre.id})}}" class="btn btn-success">Supprimer</a>

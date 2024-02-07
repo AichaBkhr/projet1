@@ -19,8 +19,11 @@ class OffresController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(OffresRepository $offresRepository): Response
     {
-        $offres = $offresRepository->findAll(); 
-        return $this->render('admin/offres/index.html.twig', compact('offres'));
+        $offres = $offresRepository->findAll();
+
+        return $this->render('admin/offres/index.html.twig', [
+            'offres' => $offres,
+        ]);
     }
 
     #[Route('/ajout', name: 'add')]
@@ -78,7 +81,6 @@ class OffresController extends AbstractController
     }
 
 
-    //refaire !!!
     #[Route('/suppression/{id}', name: 'delete')]
     #[ParamConverter("offre", class:"App\Entity\Offres")]
     public function delete(Offres $offre, EntityManagerInterface $em): Response

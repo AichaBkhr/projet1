@@ -28,12 +28,17 @@ class Offres
     #[Assert\PositiveOrZero(message:'La capacité ne peut être négative')]
     private ?int $capacite = null;
 
+
     #[ORM\OneToMany(mappedBy: 'offres', targetEntity: DetailsCommandes::class)]
     private Collection $detailsCommandes;
+
+    #[ORM\Column]
+    private ?int $nombreDeVentes = 0;
 
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -77,6 +82,8 @@ class Offres
         return $this;
     }
 
+    
+
     /**
      * @return Collection<int, DetailsCommandes>
      */
@@ -103,6 +110,18 @@ class Offres
                 $detailsCommande->setOffres(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNombreDeVentes(): ?int
+    {
+        return $this->nombreDeVentes;
+    }
+
+    public function setNombreDeVentes(?int $nombreDeVentes): static
+    {
+        $this->nombreDeVentes = $nombreDeVentes;
 
         return $this;
     }

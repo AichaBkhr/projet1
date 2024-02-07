@@ -27,7 +27,7 @@ class CommandesController extends AbstractController
             return $this->redirectToRoute('app_main');
         }
 
-        //sion on crée la commande 
+        //sinon on crée la commande 
         $order = new Commandes();
 
         //remplir la commande
@@ -45,6 +45,10 @@ class CommandesController extends AbstractController
             $offre = $offresRepository->find($item);
             $price = $offre->getPrix();
 
+            // Mise à jour du nombre de ventes de l'offre
+            $nombreDeVentesActuel = $offre->getNombreDeVentes();
+            $offre->setNombreDeVentes($nombreDeVentesActuel + $quantity);
+
             //créer le détail de commande
             $orderDetails->setOffres($offre);
             $orderDetails->setPrix($price);
@@ -59,7 +63,7 @@ class CommandesController extends AbstractController
         $session->remove('panier');
 
         $this->addFlash('message', 'Commande créée avec succès');
-        return $this->redirectToRoute('app_main');
+        return $this->redirectToRoute("payment");
 
 
 
