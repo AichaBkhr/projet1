@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UtilisateursRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -43,6 +45,16 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
+
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commandes::class)]
+    private  $commandes = null;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+        // Autres initialisations...
+    }
+
 
     public function getId(): ?int
     {
@@ -85,7 +97,7 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): static
     {
-        $this->roles = $roles;
+        $this->roles = $roles; 
 
         return $this;
     }
@@ -179,6 +191,11 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     public function clearResetToken(): void
     {
         $this->resetToken = '';
+    }
+
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
     }
 
 }

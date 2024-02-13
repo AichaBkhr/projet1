@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandesController!{% endblock %}
+
+{% block body %}
+<h1>Bravo vous venez de finaliser votre commande.</h1>
+<p>Vous pouvez visualiser votre billet en format PNG dans la rubrique Mon profil.</p>
+<p>Votre commande :</p>
+ <h1>Détails de la commande</h1>
+    <p>Référence: {{ commande.getReference() }}</p>
+    <p>Date de création: {{ commande.getDateDeCreation()|date('d/m/Y H:i:s') }}</p>
+    <p>Utilisateur: {{ commande.getUtilisateur().getNomUtilisateur() }}</p>
+    <p>Offres achetées:</p>
+    <ul>
+        {% for detail in commande.getDetailsCommandes() %}
+            <li>{{ detail.getOffres().getType() }} - {{ detail.getQuantité() }} unité(s) - {{ detail.getPrix() }} €</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('qrcode', { id: commande.getId() }) }}" class="btn btn-primary">Visualiser le e-billet</a>
+    
+{% endblock %}

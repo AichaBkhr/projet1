@@ -90,6 +90,13 @@ class OffresController extends AbstractController
             throw $this->createNotFoundException('L\'offre n\'existe pas');
         }
 
+        // Vérifier si l'offre est associée à des commandes
+        $commandes = $offre->getDetailsCommandes();
+        if ($commandes->count() > 0) {
+            $this->addFlash('error', 'Cette offre est associée à des commandes et ne peut pas être supprimée.');
+            return $this->redirectToRoute('admin_offres_index');
+        }
+
         // Supprimer l'entité de la base de données
         $em->remove($offre);
         $em->flush();

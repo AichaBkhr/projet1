@@ -6,12 +6,14 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1", 
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.17",
+        "endroid/qr-code": "^5.0",
+        "endroid/qr-code-bundle": "^5.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.24",
         "sensio/framework-extra-bundle": "*",
@@ -61,7 +63,8 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "endroid/installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {

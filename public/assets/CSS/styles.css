@@ -1,0 +1,52 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 1rem;
+}
+
+.card {
+    width: 18rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-text {
+    font-family: 'Arial', sans-serif; /* Choisissez la police de caractères */
+    font-weight: bold; /* Met le texte en gras */
+    
+}
+.card-img-top {
+    width: 100%; /* Redimensionne l'image pour remplir la largeur de la carte */
+    height: 200px; /* Hauteur fixe pour toutes les images */
+    object-fit: cover; /* Ajuste la taille de l'image tout en préservant son ratio d'aspect */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #00468B;
+    color: #FFF;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+footer {
+    background-color: #F2F2F2;
+    padding: 20px;
+    text-align: center;
+}

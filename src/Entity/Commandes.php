@@ -27,7 +27,7 @@ class Commandes
     private ?string $Cle_2 = null;
 
     #[ORM\Column(length: 255, unique : true)]
-    private ?string $QrCode = null;
+    private ?string $QrCode = null; 
 
     #[ORM\ManyToOne(targetEntity: Utilisateurs::class, inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]

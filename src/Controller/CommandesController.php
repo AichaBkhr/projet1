@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commandes;
 use App\Entity\DetailsCommandes;
+use App\Repository\CommandesRepository;
 use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommandesController extends AbstractController
 {
+
+    #[Route('/', name:'index')]
+    public function index(CommandesRepository $commandesRepository)
+    {
+        $commandes = $commandesRepository->findAll(); // Ou une autre méthode pour récupérer les commandes
+        return $this->render('commandes/index.html.twig', [
+            'commandes' => $commandes,
+        ]);
+        
+    }
+    #[Route('/show/{id}', name:'show')]
+    #[ParamConverter("commande", class:"App\Entity\Commandes")]
+    public function showCommande(Commandes $commande)
+    {
+        return $this->render('commandes/show.html.twig', [
+            'commande' => $commande,
+        ]);
+        
+    }
+
+   
     #[Route('/ajout', name: 'add')]
     public function add(SessionInterface $session, OffresRepository $offresRepository, EntityManagerInterface $em): Response
     {
@@ -62,8 +84,11 @@ class CommandesController extends AbstractController
 
         $session->remove('panier');
 
+        $commandeId = $order->getId();
+
+
         $this->addFlash('message', 'Commande créée avec succès');
-        return $this->redirectToRoute("payment");
+        return $this->redirectToRoute("payment", ['id' => $commandeId]);
 
 
 

@@ -2,11 +2,29 @@
 
 {% block title %}Jeux Olympiques{% endblock %}
 
+
 {% block body %}
-<h1> JEUX OLYMPIQUES PARIS 2024  </h1>
-<p>Les Jeux olympiques d'été sont une 
-compétition multisports mondiale supervisés
-par le Comité international olympique et se 
-déroulent tous les quatre ans.</p>
-{% include "_partials/_carousel.html.twig" %} 
+    <header>
+        <h1>JEUX OLYMPIQUES PARIS 2024</h1>
+    </header>
+    <main>
+        <section class="content">
+            <p>Les Jeux Olympiques, basés sur des traditions anciennes remontant à la Grèce antique,
+            sont aujourd'hui l'un des événements sportifs les plus prestigieux et les plus attendus 
+            au monde. Organisés tous les quatre ans, ces jeux internationaux célèbrent l'excellence 
+            sportive, l'unité mondiale et la paix. Leur histoire moderne a commencé en 1896 à Athènes,
+            en Grèce, marquant le début d'une tradition qui se poursuit encore aujourd'hui. Les Jeux 
+            Olympiques sont bien plus qu'une simple compétition sportive ; ils incarnent des valeurs 
+            telles que le fair-play, la solidarité et le respect entre les personnes. Ils offrent 
+            également une plateforme permettant aux athlètes du monde entier de concourir au plus 
+            haut niveau, repoussant constamment les limites de la performance humaine. De plus, 
+            les Jeux Olympiques ont un impact significatif sur les villes hôtes, 
+            en stimulant l'économie locale, en améliorant les infrastructures et en laissant un héritage
+            culturel durable. En résumé, les Jeux Olympiques continuent de captiver et d'inspirer des
+            millions de personnes à travers le monde, représentant une célébration universelle de
+            l'esprit humain et de l'unité mondiale.</p>
+        </section>
+    </main>
+    
+{% include "_partials/_card.html.twig" %} 
 {% endblock %}
