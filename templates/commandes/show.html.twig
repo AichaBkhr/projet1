@@ -5,7 +5,7 @@
 {% block body %}
 <h1>Bravo vous venez de finaliser votre commande.</h1>
 <p>Vous pouvez visualiser votre billet en format PNG dans la rubrique Mon profil.</p>
-<p>Votre commande :</p>
+
  <h1>Détails de la commande</h1>
     <p>Référence: {{ commande.getReference() }}</p>
     <p>Date de création: {{ commande.getDateDeCreation()|date('d/m/Y H:i:s') }}</p>

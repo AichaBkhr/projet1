@@ -34,7 +34,7 @@ class CommandesController extends AbstractController
             'commande' => $commande,
         ]);
         
-    }
+    } 
 
    
     #[Route('/ajout', name: 'add')]

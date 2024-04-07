@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -42,7 +43,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant j\'acceptez la politique des données ...'
+                'label' => 'En m\'inscrivant j\'acceptez le RGPD (réglement général sur la protection des données)'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -59,13 +60,21 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'min' => 8,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.!?*#@\$\/&])[A-Za-z\d.!?*#@\$\/&]{8,}$/',
+                        'message' => 'Le mot de passe doit contenir au moins un chiffre,
+                         une lettre minuscule, une lettre majuscule et au moins un des caractères spéciaux suivants :
+                          .!?*#@$/&.'
+                    ]),
                 ],
-                'label' => 'Mot de passe'
+                'label' => 'Mot de passe',
+                'help' => 'Le mot de passe doit contenir au moins 8 caractères, dont au moins un chiffre, une lettre minuscule, une lettre majuscule et au moins un des caractères spéciaux suivants : .!?*#@$/&.'
+            
 
             ])
         ;

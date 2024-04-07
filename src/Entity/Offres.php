@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: OffresRepository::class)]
+#[ORM\Entity(repositoryClass: OffresRepository::class)] 
 class Offres
 {
     #[ORM\Id]
@@ -21,11 +21,11 @@ class Offres
     private ?string $type = null;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
-    //#[Assert\PositiveOrZero(message:'Le prix ne peut pas être négatif')]
+    #[Assert\PositiveOrZero(message:'Le prix ne peut pas être négatif')]
     private ?float $prix = null;
 
     #[ORM\Column]
-    #[Assert\PositiveOrZero(message:'La capacité ne peut être négative')]
+    #[Assert\PositiveOrZero(message:'La capacité ne peut pas être négative')]
     private ?int $capacite = null;
 
 

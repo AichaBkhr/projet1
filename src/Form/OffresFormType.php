@@ -23,11 +23,6 @@ class OffresFormType extends AbstractType
             )
             ->add('prix', MoneyType::class, options:[
                 'label' => 'Prix',
-                'constraints' => [
-                    new Positive(
-                        message: 'Le prix ne peut être négatif'
-                    )
-                    ],
                 'attr' => [
                     'placeholder' => 'Entrez le prix de l\'offre',
                     ], 

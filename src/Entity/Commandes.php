@@ -6,25 +6,28 @@ use App\Repository\CommandesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CommandesRepository::class)]
+#[UniqueEntity('reference')]
+#[UniqueEntity('Cle_2')]
+#[UniqueEntity('QrCode')]
 class Commandes
 {
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; 
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20, unique : true)]
     private ?string $reference = null;
 
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $date_de_creation = null;
 
     #[ORM\Column(length: 255, unique : true)]
-    private ?string $Cle_2 = null;
+    private ?string $Cle_2 = null; 
 
     #[ORM\Column(length: 255, unique : true)]
     private ?string $QrCode = null; 

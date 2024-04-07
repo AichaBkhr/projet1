@@ -33,7 +33,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/add/{id}', name:'add')]
-    #[ParamConverter("offre", class:"App\Entity\Offres")]
+    //#[ParamConverter("offre", class:"App\Entity\Offres")]
     public function add(Offres $offre, SessionInterface $session)
     {
         //récuperer l'id de l'offre 
@@ -55,7 +55,7 @@ class CartController extends AbstractController
 
 
     #[Route('/remove/{id}', name:'remove')]
-    #[ParamConverter("offre", class:"App\Entity\Offres")]
+    //#[ParamConverter("offre", class:"App\Entity\Offres")]
     public function remove(Offres $offre, SessionInterface $session)
     {
         //récuperer l'id de l'offre 
@@ -80,7 +80,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/delete/{id}', name:'delete')]
-    #[ParamConverter("offre", class:"App\Entity\Offres")]
+    //#[ParamConverter("offre", class:"App\Entity\Offres")]
     public function delete(Offres $offre, SessionInterface $session)
     {
         //récuperer l'id de l'offre 
