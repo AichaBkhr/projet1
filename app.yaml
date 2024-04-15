@@ -1,5 +1,0 @@
-runtime: php73
-
-env_variables:
-  APP_ENV: prod
-  DATABASE_URL: "postgresql://postgres:Blida2019@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
