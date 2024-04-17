@@ -58,8 +58,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "6.1.*",
-        "symfony/web-profiler-bundle": "6.1.*",
-        "heroku/heroku-buildpack-php" : "dev-master"
+        "symfony/web-profiler-bundle": "6.1.*"
         
     },
     "config": {
