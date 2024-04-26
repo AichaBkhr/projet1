@@ -52,7 +52,6 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
-        // Autres initialisations...
     }
 
 
