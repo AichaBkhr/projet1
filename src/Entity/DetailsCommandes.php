@@ -18,7 +18,7 @@ class DetailsCommandes
     private ?int $prix = null;
 
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: Commandes::class,inversedBy: 'detailsCommandes')]
+    #[ORM\ManyToOne(targetEntity: Commandes::class,inversedBy: 'details_commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commandes = null;
 
