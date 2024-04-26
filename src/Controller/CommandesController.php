@@ -72,6 +72,7 @@ class CommandesController extends AbstractController
             $offre->setNombreDeVentes($nombreDeVentesActuel + $quantity);
 
             //créer le détail de commande
+            $orderDetails->setCommandes($order);
             $orderDetails->setOffres($offre);
             $orderDetails->setPrix($price);
             $orderDetails->setQuantité($quantity);
