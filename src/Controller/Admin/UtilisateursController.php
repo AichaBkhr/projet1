@@ -14,6 +14,6 @@ class UtilisateursController extends AbstractController
     public function index(UtilisateursRepository $utilisateursRepository): Response
     {
         $utilisateurs = $utilisateursRepository->findBy([], ['Nom_utilisateur' => 'asc']);
-        return $this->render('admin/utilisateurs/index.html.twig', compact('utilisateurs'));
+        return $this->render('admin/Utilisateurs/index.html.twig', compact('utilisateurs'));
     }
 }
