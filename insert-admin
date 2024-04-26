@@ -1,0 +1,2 @@
+INSERT INTO utilisateurs(id, email, roles, password, nom_utilisateur, cle_1, date_de_creation, is_verified, reset_token)
+VALUES (2, 'admin@jo26.fr', '["ROLE_USER","ROLE_ADMIN"]', '$2y$13$4x3sCnfUL8TacYsvy0jSYusBBAw4kKUvRuhWDPkbQwQxwHyN5nZ1W', 'admin jo', '', ,true , '' );
