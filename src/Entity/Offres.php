@@ -29,15 +29,16 @@ class Offres
     private ?int $capacite = null;
 
 
-    #[ORM\OneToMany(mappedBy: 'offres', targetEntity: DetailsCommandes::class)]
-    private Collection $detailsCommandes;
-
     #[ORM\Column]
     private ?int $nombreDeVentes = 0;
 
+    #[ORM\OneToMany(mappedBy: 'offre', targetEntity: DetailsCommandes::class)]
+    private Collection $detailsCommandes;
+
+
     public function __construct()
     {
-        $this->detailsCommandes = new ArrayCollection();
+        #$this->detailsCommandes = new ArrayCollection();
         
     }
 
@@ -82,38 +83,6 @@ class Offres
         return $this;
     }
 
-    
-
-    /**
-     * @return Collection<int, DetailsCommandes>
-     */
-    public function getDetailsCommandes(): Collection
-    {
-        return $this->detailsCommandes;
-    }
-
-    public function addDetailsCommande(DetailsCommandes $detailsCommande): static
-    {
-        if (!$this->detailsCommandes->contains($detailsCommande)) {
-            $this->detailsCommandes->add($detailsCommande);
-            $detailsCommande->setOffres($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
-    {
-        if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
-            if ($detailsCommande->getOffres() === $this) {
-                $detailsCommande->setOffres(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getNombreDeVentes(): ?int
     {
         return $this->nombreDeVentes;
@@ -125,4 +94,35 @@ class Offres
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, DetailsCommandes>
+     */
+    public function getDetailsCommandes(): Collection
+    {
+        return $this->detailsCommandes;
+    }
+
+    public function addDetailsCommandes(DetailsCommandes $detailsCommande): static
+    {
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes->add($detailsCommande);
+            $detailsCommande->setOffres($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommandes(DetailsCommandes $detailsCommande): static
+    {
+        if ($this->detailsCommandes->removeElement($detailsCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getOffres() === $this) {
+                $detailsCommande->setOffres(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

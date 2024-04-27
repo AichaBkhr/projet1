@@ -7,9 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DetailsCommandesRepository::class)]
 class DetailsCommandes
-{
-    
-    
+{    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null; 
 
     #[ORM\Column]
     private ?int $quantité = null;
@@ -17,17 +19,13 @@ class DetailsCommandes
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: Commandes::class,inversedBy: 'detailsCommandes')]
+    #[ORM\ManyToOne(targetEntity: Commandes::class, inversedBy: 'detailsCommandes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Commandes $commandes = null;
+    private ?Commandes $commande = null;
 
     #[ORM\ManyToOne(targetEntity: Offres::class, inversedBy: 'detailsCommandes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Offres $offres = null;
+    private ?Offres $offre = null;
 
-
-    
     public function getQuantité(): ?int
     {
         return $this->quantité;
@@ -54,27 +52,25 @@ class DetailsCommandes
 
     public function getCommandes(): ?Commandes
     {
-        return $this->commandes;
+        return $this->commande;
     }
 
-    public function setCommandes(?Commandes $commandes): static
+    public function setCommandes(?Commandes $commande): static
     {
-        $this->commandes = $commandes;
+        $this->commande = $commande;
 
         return $this;
     }
 
     public function getOffres(): ?Offres
     {
-        return $this->offres;
+        return $this->offre;
     }
 
-    public function setOffres(?Offres $offres): static
+    public function setOffres(?Offres $offre): static
     {
-        $this->offres = $offres;
+        $this->offre = $offre;
 
         return $this;
     }
-
-    
 }

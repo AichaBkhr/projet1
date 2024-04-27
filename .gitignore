@@ -19,3 +19,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 lien_projet
+last
+/migrations/temp
+/migrations/ZZvides
+/migrations/Zerreur

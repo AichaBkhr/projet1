@@ -49,6 +49,7 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commandes::class)]
     private  $commandes = null;
 
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();

@@ -36,13 +36,13 @@ class Commandes
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateurs $utilisateur = null;
 
-    #[ORM\OneToMany(mappedBy: 'commandes', targetEntity: DetailsCommandes::class, orphanRemoval: true, cascade: ['persist'])]
-    private  $detailsCommandes = null;
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailsCommandes::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $detailsCommandes;
 
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
-        //$this->created_at = new \DateTimeImmutable();
+        $this->created_at = new \DateTimeImmutable();
 
     }
 
@@ -109,30 +109,35 @@ class Commandes
         $this->utilisateur = $utilisateur;
 
         return $this;
-    } public function getDetailsCommandes(): Collection
+    }
+
+    /**
+     * @return Collection<int, DetailsCommandes>
+     */
+    public function getDetailsCommandes(): Collection
     {
         return $this->detailsCommandes;
     }
 
-    public function addDetailsCommandes(DetailsCommandes $detailsCommandes): self
+    public function addDetailsCommandes(DetailsCommandes $detailsCommande): static
     {
-        if (!$this->detailsCommandes->contains($detailsCommandes)) {
-            $this->detailsCommandes[] = $detailsCommandes;
-            $detailsCommandes->setCommandes($this);
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes->add($detailsCommande);
+            $detailsCommande->setCommandes($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsCommandes(DetailsCommandes $detailsCommandes): self
+    public function removeDetailsCommandes(DetailsCommandes $detailsCommande): static
     {
-        if ($this->detailsCommandes->removeElement($detailsCommandes)) {
+        if ($this->detailsCommandes->removeElement($detailsCommande)) {
             // set the owning side to null (unless already changed)
-            if ($detailsCommandes->getCommandes() === $this) {
-                $detailsCommandes->setCommandes(null);
+            if ($detailsCommande->getCommandes() === $this) {
+                $detailsCommande->setCommandes(null);
             }
         }
 
         return $this;
-    }
+    } 
 }
