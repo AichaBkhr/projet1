@@ -35,6 +35,7 @@ class Offres
     #[ORM\Column]
     private ?int $nombreDeVentes = 0;
 
+
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
@@ -125,4 +126,5 @@ class Offres
 
         return $this;
     }
+
 }
