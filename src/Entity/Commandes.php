@@ -36,12 +36,9 @@ class Commandes
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateurs $utilisateur = null;
 
-    #[ORM\OneToMany(mappedBy: 'commandes', targetEntity: DetailsCommandes::class, orphanRemoval: true, cascade: ['persist'])]
-    private  $detailsCommandes = null;
-
     public function __construct()
     {
-        $this->detailsCommandes = new ArrayCollection();
+        //$this->detailsCommandes = new ArrayCollection();
         //$this->created_at = new \DateTimeImmutable();
 
     }
@@ -109,30 +106,5 @@ class Commandes
         $this->utilisateur = $utilisateur;
 
         return $this;
-    } public function getDetailsCommandes(): Collection
-    {
-        return $this->detailsCommandes;
-    }
-
-    public function addDetailsCommandes(DetailsCommandes $detailsCommandes): self
-    {
-        if (!$this->detailsCommandes->contains($detailsCommandes)) {
-            $this->detailsCommandes[] = $detailsCommandes;
-            $detailsCommandes->setCommandes($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetailsCommandes(DetailsCommandes $detailsCommandes): self
-    {
-        if ($this->detailsCommandes->removeElement($detailsCommandes)) {
-            // set the owning side to null (unless already changed)
-            if ($detailsCommandes->getCommandes() === $this) {
-                $detailsCommandes->setCommandes(null);
-            }
-        }
-
-        return $this;
-    }
+    } 
 }
