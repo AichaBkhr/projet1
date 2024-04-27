@@ -19,11 +19,11 @@ class DetailsCommandes
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
+    #[ORM\ManyToOne(targetEntity: Commandes::class, inversedBy: 'detailsCommandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
+    #[ORM\ManyToOne(targetEntity: Offres::class, inversedBy: 'detailsCommandes')]
     private ?Offres $offre = null;
 
     public function getQuantité(): ?int
@@ -50,24 +50,24 @@ class DetailsCommandes
         return $this;
     }
 
-    public function getCommande(): ?Commandes
+    public function getCommandes(): ?Commandes
     {
         return $this->commande;
     }
 
-    public function setCommande(?Commandes $commande): static
+    public function setCommandes(?Commandes $commande): static
     {
         $this->commande = $commande;
 
         return $this;
     }
 
-    public function getOffre(): ?Offres
+    public function getOffres(): ?Offres
     {
         return $this->offre;
     }
 
-    public function setOffre(?Offres $offre): static
+    public function setOffres(?Offres $offre): static
     {
         $this->offre = $offre;
 

@@ -103,22 +103,22 @@ class Offres
         return $this->detailsCommandes;
     }
 
-    public function addDetailsCommande(DetailsCommandes $detailsCommande): static
+    public function addDetailsCommandes(DetailsCommandes $detailsCommande): static
     {
         if (!$this->detailsCommandes->contains($detailsCommande)) {
             $this->detailsCommandes->add($detailsCommande);
-            $detailsCommande->setOffre($this);
+            $detailsCommande->setOffres($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
+    public function removeDetailsCommandes(DetailsCommandes $detailsCommande): static
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
             // set the owning side to null (unless already changed)
-            if ($detailsCommande->getOffre() === $this) {
-                $detailsCommande->setOffre(null);
+            if ($detailsCommande->getOffres() === $this) {
+                $detailsCommande->setOffres(null);
             }
         }
 
