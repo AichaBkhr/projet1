@@ -19,6 +19,13 @@ class DetailsCommandes
     #[ORM\Column]
     private ?int $prix = null;
 
+    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Commandes $commande = null;
+
+    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
+    private ?Offres $offre = null;
+
     public function getQuantité(): ?int
     {
         return $this->quantité;
@@ -39,6 +46,30 @@ class DetailsCommandes
     public function setPrix(int $prix): static
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commandes
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commandes $commande): static
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getOffre(): ?Offres
+    {
+        return $this->offre;
+    }
+
+    public function setOffre(?Offres $offre): static
+    {
+        $this->offre = $offre;
 
         return $this;
     }
