@@ -2,17 +2,17 @@ Projet Céation site web pour les Jeux Olympiques Paris 2024
 Ce site est conçus dans le but de vendre des billets pour assister aux différetes épreuves des Jeux Olympiques.
 
 Technologies utilisé : 
-Front-end :
+- Front-end :
   - HTML
   - CSS
     - CSS3
     - Bootstrap v5.3.2
   - Twig
   - JavaScript
-Back-end :
+- Back-end :
   - php symfony : 5.7.6
   - Composer 2.6.5
-Base de donnée :
+- Base de donnée :
   - Postgresql
     -  Pour se connecter à la base donnée distante (pour les évaluateurs de studi) : 
         -  Host : cb4l59cdg4fg1k.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com
@@ -20,7 +20,7 @@ Base de donnée :
         -  User : udi4f3qbrto2h
         -  Port : 5432
         -  Password : p40927b51218edfcc0db54d0d31b476dd6ca8fb8f9d7e7f508bfed1fe93cedc43
-Déploiement :
+- Déploiement :
   - heroku
 
 
