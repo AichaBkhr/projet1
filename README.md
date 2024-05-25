@@ -14,12 +14,12 @@ Back-end :
   - Composer 2.6.5
 Base de donnée :
   - Postgresql
-      Pour se connecter à la base donnée distante (pour les évaluateurs de studi) : 
-        Host : cb4l59cdg4fg1k.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com
-        Database : dbbucusll8b9hc
-        User : udi4f3qbrto2h
-        Port : 5432
-        Password : p40927b51218edfcc0db54d0d31b476dd6ca8fb8f9d7e7f508bfed1fe93cedc43
+    -  Pour se connecter à la base donnée distante (pour les évaluateurs de studi) : 
+        -  Host : cb4l59cdg4fg1k.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com
+        -  Database : dbbucusll8b9hc
+        -  User : udi4f3qbrto2h
+        -  Port : 5432
+        -  Password : p40927b51218edfcc0db54d0d31b476dd6ca8fb8f9d7e7f508bfed1fe93cedc43
 Déploiement :
   - heroku
 
